@@ -1,0 +1,16 @@
+{
+  "name": "atrium-bismarck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Modern furnished office and conference-room website for Atrium Offices in Bismarck, built for Cloudflare Pages.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "npm run check && node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist"
+  }
+}
