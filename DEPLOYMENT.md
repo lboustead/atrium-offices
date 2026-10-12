@@ -1,7 +1,7 @@
 # Cloudflare Pages handoff
 
 Target domain: **atriumbismarck.com**  
-GitHub repository: **https://github.com/lboustead/atrium-bismarck**
+GitHub repository: **https://github.com/lboustead/atrium-offices**
 
 ## Connect the code
 
