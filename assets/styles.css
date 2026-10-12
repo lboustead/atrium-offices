@@ -22,3 +22,19 @@
 .site-header .wordmark:hover .brand-name{color:#8f5535}
 @media(max-width:1100px){.brand-mark{width:50px;height:50px;flex-basis:50px}}
 @media(max-width:760px){.brand-mark{width:46px;height:46px;flex-basis:46px}.site-header .wordmark{gap:10px;letter-spacing:2.4px}}
+
+/* Inventory visibility is controlled by assets/availability.js. */
+[data-no-office-booking]{display:none!important}
+html[data-private-office-booking="unavailable"] [data-private-office-booking],html[data-private-office-day-pass="unavailable"] [data-private-office-day-pass]{display:none!important}
+html[data-private-office-booking="unavailable"][data-private-office-day-pass="unavailable"] [data-office-booking]{display:none!important}
+html[data-private-office-booking="unavailable"][data-private-office-day-pass="unavailable"] [data-no-office-booking]{display:inline-flex!important}
+html[data-private-office-booking="unavailable"][data-private-office-day-pass="available"] .booking-rates,html[data-private-office-booking="available"][data-private-office-day-pass="unavailable"] .booking-rates{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-private-office-booking="unavailable"][data-private-office-day-pass="unavailable"] .booking-rates{grid-template-columns:minmax(0,420px)}
+
+/* Keep desktop navigation centered independently of the left and right items. */
+.nav-book{text-decoration:none}.nav-book-mobile{display:none}
+@media(min-width:761px){.nav-wrap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.nav-wrap>.wordmark{justify-self:start}.site-header nav{grid-column:2;justify-self:center}.nav-book-header{grid-column:3;justify-self:end}}
+@media(max-width:760px){.nav-book-header{display:none}.nav-book-mobile{display:flex}}
+
+/* SVG spark marks render consistently instead of switching to emoji glyphs. */
+.spark-icon{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}

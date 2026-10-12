@@ -60,6 +60,23 @@ handoff checklist.
 - `404.html`: static error page, also preventing Pages' implicit SPA fallback.
 - `scripts/`: dependency-free local tooling; excluded from the deployed output.
 
+### Booking availability switches
+
+Short-term private-office products can be shown or hidden without changing page
+markup. Open `assets/availability.js`, change either `false`/`true` value, and
+commit the file:
+
+```js
+window.ATRIUM_AVAILABILITY = {
+  privateOfficeBooking: false,
+  privateOfficeDayPass: false,
+};
+```
+
+Cloudflare Pages deploys the committed setting automatically. These switches
+only control visibility on this website; update the matching product visibility
+or inventory in Optix as well so direct booking links follow the same rules.
+
 `dist/` is generated and ignored by Git. The build copies only public HTML,
 assets, and Pages configuration files, keeping project documentation and tooling
 outside the deployment.
