@@ -12,7 +12,7 @@ Source: <https://atriumbismarck.com/>.
 - Facebook: <https://www.facebook.com/atriumbismarck>.
 - Conference room booking, plus the free Atrium Offices mobile app.
 - The original gallery caption for the coffee-bar photograph says “Free coffee bar! Free internet.” Those two amenities are carried forward.
-- The original real estate license and ownership-interest disclosure is retained. It identifies Hunt Boustead (#8264), Nicole Boustead (#9148), and Lucas Boustead (#11629), The Boustead Group, with Trademark Realty of Bismarck.
+- The original real estate license and ownership-interest disclosure is retained. It identifies Hunt Boustead (#8264) and Lucas Boustead (#11629), The Boustead Group, with Trademark Realty of Bismarck.
 
 ## Published rates
 
@@ -70,3 +70,10 @@ DM Sans and DM Serif Display are self-hosted Google Fonts. Their SIL Open Font L
 ## Owner review before launch
 
 Confirm current rates, lease terms, conference room allowances, ownership disclosure, and the two app listings. The original website's contact link pointed to a hidden page that currently renders rates; the redesign restores a direct email contact path. Domain and DNS changes are separate from this frontend code. The new site contains no GoDaddy analytics, tracking scripts, or cookie banner.
+
+## October refinement
+
+Door access is managed through the app. This note is shown below the browser
+booking alternative and included in all conference/private-office booking cards,
+including currently hidden products. Availability switches remain unchanged.
+The legal disclosure is the final footer paragraph with copyright appended.

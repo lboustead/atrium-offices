@@ -98,3 +98,13 @@ Business photos and branding were brought forward from the existing websites
 identified by the owner. Any bundled third-party fonts retain their supplied
 license notices in `assets/`. This private repository grants no public license
 to the business photography or branding.
+
+## Visual and booking refinements
+
+Headings, section surfaces and photographs use varied entrances that replay
+when returning from either scroll direction. Hover and keyboard focus provide
+matching feedback; device reduced-motion preferences remain respected.
+The door-access note appears in all three booking cards and directly below the
+browser-booking alternative. Hidden private-office availability remains under
+the existing switches. The legal disclosure is the last footer paragraph with
+copyright appended.

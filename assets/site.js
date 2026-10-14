@@ -2,6 +2,88 @@
 
 document.documentElement.classList.add('js');
 
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const entranceTargets = [...document.querySelectorAll('[data-enter]')];
+let entranceObserver;
+
+const revealEntrance = (element, immediate = false) => {
+  if (!immediate && element.classList.contains('is-entered')) return;
+  element.classList.toggle('enter-instant', immediate);
+  element.classList.toggle('is-entering', !immediate);
+  element.classList.add('is-entered');
+};
+
+const resetEntrance = (element, fromAbove = false) => {
+  if (element.contains(document.activeElement)) return;
+  element.dataset.enterEdge = fromAbove ? 'above' : 'below';
+  element.classList.add('enter-instant');
+  element.classList.remove('is-entered', 'is-entering');
+};
+
+const configureEntrances = () => {
+  if (entranceObserver) entranceObserver.disconnect();
+  entranceObserver = null;
+  document.documentElement.classList.toggle('motion-paused', motionPreference.matches);
+  for (const element of entranceTargets) element.classList.remove('is-entering');
+  if (motionPreference.matches || typeof window.IntersectionObserver !== 'function') {
+    document.documentElement.classList.remove('scroll-motion');
+    return;
+  }
+
+  for (const element of entranceTargets) {
+    const bounds = element.getBoundingClientRect();
+    if ((bounds.width && bounds.height && bounds.bottom > 0 && bounds.top < window.innerHeight)
+      || element.contains(document.activeElement)) {
+      revealEntrance(element, true);
+    } else {
+      resetEntrance(element, bounds.bottom <= 0);
+    }
+  }
+
+  entranceObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.boundingClientRect.width || !entry.boundingClientRect.height) continue;
+      if (entry.isIntersecting) {
+        revealEntrance(entry.target);
+      } else if (entry.boundingClientRect.bottom <= 0
+        || entry.boundingClientRect.top >= window.innerHeight) {
+        resetEntrance(entry.target, entry.boundingClientRect.bottom <= 0);
+      }
+    }
+  }, { threshold: 0 });
+  document.documentElement.classList.add('scroll-motion');
+  for (const element of entranceTargets) entranceObserver.observe(element);
+};
+
+const finishEntrance = (event) => {
+  if (event.propertyName === 'transform' && event.target.matches('[data-enter]')) {
+    event.target.classList.remove('is-entering');
+  }
+};
+document.addEventListener('transitionend', finishEntrance);
+document.addEventListener('transitioncancel', finishEntrance);
+let pointerEntrance = null;
+document.addEventListener('pointerdown', (event) => {
+  pointerEntrance = event.target.closest('[data-enter]');
+}, true);
+const clearPointerEntrance = () => { window.setTimeout(() => { pointerEntrance = null; }, 0); };
+document.addEventListener('pointerup', clearPointerEntrance, true);
+document.addEventListener('pointercancel', clearPointerEntrance, true);
+document.addEventListener('focusin', (event) => {
+  const entrance = event.target.closest('[data-enter]');
+  if (entrance) revealEntrance(entrance, entrance !== pointerEntrance);
+});
+document.addEventListener('focusout', (event) => {
+  const entrance = event.target.closest('[data-enter]');
+  if (!entrance || !entranceObserver || entrance.contains(event.relatedTarget)) return;
+  const bounds = entrance.getBoundingClientRect();
+  if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) {
+    resetEntrance(entrance, bounds.bottom <= 0);
+  }
+});
+motionPreference.addEventListener('change', configureEntrances);
+configureEntrances();
+
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#primary-navigation');
 
